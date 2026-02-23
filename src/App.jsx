@@ -1,7 +1,20 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import DefaultLayout from "./layouts/DefaultLayout"
+import HomePage from "./pages/HomePage"
+import MoviePage from "./pages/MoviePage"
+
+
 function App() {
 
   return (
-    <h1>progetto</h1>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<DefaultLayout />}>
+          <Route index element={<HomePage />} />
+          <Route path="/movies/:id" element={<MoviePage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
