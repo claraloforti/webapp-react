@@ -44,7 +44,7 @@ const HomePage = () => {
             <h2><i>Boolean movies community</i></h2>
             {/* Mostro le cards */}
             <div>
-                <div className="row row-cols-3 mt-4">
+                <div className="row row-cols-5 mt-4">
                     {renderMovies()}
                 </div>
             </div>

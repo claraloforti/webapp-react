@@ -54,9 +54,9 @@ const MoviePage = () => {
                         className="w-25" />
                 </div>
                 <h2>{movie.title}</h2>
-                <p>Genere: {movie.genre}</p>
-                <p>Data uscita: {movie.release_year}</p>
-                <p>Regista: {movie.director}</p>
+                <p className="mb-1"><strong>Genere: </strong>{movie.genre}</p>
+                <p className="mb-1"><strong>Anno uscita: </strong>{movie.release_year}</p>
+                <p><strong>Regista: </strong>{movie.director}</p>
                 <p>{movie.abstract}</p>
             </header>
             {/* Recensioni del film selezionato */}
