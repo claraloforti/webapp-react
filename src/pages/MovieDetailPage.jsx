@@ -27,7 +27,7 @@ const MoviePage = () => {
             .then(res => { setMovie(res.data); })
             .catch(err => {
                 console.log(err);
-                if (err.status = 404) redirect('/404');
+                if (err.status === 404) redirect('/404');
             })
     }
 
