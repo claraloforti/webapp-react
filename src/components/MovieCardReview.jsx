@@ -1,14 +1,16 @@
 // Componente card review
 
-const MovieCardReview = () => {
+const MovieCardReview = (props) => {
+
+    const { name, vote, text } = props.reviewProp
+
     return (
         // Contenuti momentanei della review
         <div className="card mb-4">
             <div className="card-body">
-                <p className="card-text">
-                    testo della review</p>
-                <strong>Vote: 5</strong>
-                <address><i>By autore della review</i></address>
+                <p className="card-text">{text}</p>
+                <strong>Vote: {vote}</strong>
+                <address><i>By {name}</i></address>
             </div>
         </div>
     )
