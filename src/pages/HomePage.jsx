@@ -34,7 +34,7 @@ const HomePage = () => {
     }
 
 
-    // Richiamo funzione di fetch al montaggio della page
+    // Richiamo funzione di fetch solo al montaggio della pagina
     useEffect(fetchMovies, []);
 
 

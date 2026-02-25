@@ -7,10 +7,12 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 
 // Importo le cards delle reviews
 import MovieCardReview from "../components/MovieCardReview"
+// Importo form per inserire una recensione
+import ReviewForm from "../components/ReviewForm";
 
 const endpoint = "http://localhost:3000/api/movies/";
 
-const MoviePage = () => {
+const MovieDetailPage = () => {
 
     // Prendo id film da url rotta
     const { id } = useParams();
@@ -21,24 +23,24 @@ const MoviePage = () => {
     // Var di stato per il film
     const [movie, setMovie] = useState({});
 
-    // Funzione che gestisce la chiamata alla rotta show di BE
+    // Funzione che effettua la richiesta alla rotta show di BE per ottenere i dati del film
     const fetchMovie = () => {
         axios.get(endpoint + id)
             .then(res => { setMovie(res.data); })
             .catch(err => {
                 console.log(err);
-                if (err.status === 404) redirect('/404');
+                if (err.response?.status === 404) redirect('/404');
             })
     }
 
-    // richiamo funzione di fetch al montaggio della page
+    // Richiamo funzione di fetch solo al montaggio della pagina
     useEffect(fetchMovie, []);
 
     // Funzione di rendering del listato dei movies
     const renderReviews = () => {
         return movie.reviews?.map(review => {
             return (
-                <MovieCardReview reviewProp={review} key={review.id} />
+                <MovieCardReview reviewProp={review} key={review.id} /> // Passo l'oggetto review come prop al figlio MovieCardReview
             )
         })
     }
@@ -66,6 +68,12 @@ const MoviePage = () => {
                 </header>
                 {renderReviews()}
             </section>
+            {/* Form per aggiungere una recensione */}
+            <section className="review-form">
+                {/* Passo come prop al figlio ReviewForm l'id del film
+                e la funzione per ricaricare i dati del film dopo l'inserimento di una nuova recensione */}
+                <ReviewForm movie_id={movie.id} reloadReviews={fetchMovie} />
+            </section>
             {/* Bottone torna alla HomePage */}
             <footer className="border-top border-1 pt-2 mb-3 d-flex justify-content-end">
                 <Link className="btn btn-secondary" to="/">Back to home</Link>
@@ -74,4 +82,4 @@ const MoviePage = () => {
     )
 }
 
-export default MoviePage
+export default MovieDetailPage

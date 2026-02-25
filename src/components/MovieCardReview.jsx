@@ -2,6 +2,7 @@
 
 const MovieCardReview = (props) => {
 
+    // Destrutturo la prop review ricevuta dal padre MovieDetailPage
     const { name, vote, text } = props.reviewProp
 
     return (
