@@ -3,7 +3,7 @@ import DefaultLayout from "./layouts/DefaultLayout"
 import HomePage from "./pages/HomePage"
 import MovieDetailPage from "./pages/MovieDetailPage"
 import NotFoundPage from "./pages/NotFoundPage"
-import { GlobalProvider } from "./contexts/GeneralContext"
+import { GlobalProvider } from "./contexts/GlobalContext"
 
 
 function App() {
