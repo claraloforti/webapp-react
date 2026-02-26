@@ -3,7 +3,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom"
-
+import { useGlobal } from "../contexts/GlobalContext";
 
 // Importo le cards delle reviews
 import MovieCardReview from "../components/MovieCardReview"
@@ -12,7 +12,11 @@ import ReviewForm from "../components/ReviewForm";
 
 const endpoint = "http://localhost:3000/api/movies/";
 
+
 const MovieDetailPage = () => {
+
+    // Funzione per aggiornare stato globale del loader
+    const { setIsLoading } = useGlobal();
 
     // Prendo id film da url rotta
     const { id } = useParams();
@@ -25,12 +29,14 @@ const MovieDetailPage = () => {
 
     // Funzione che effettua la richiesta alla rotta show di BE per ottenere i dati del film
     const fetchMovie = () => {
+        setIsLoading(true); // Attivo il loader prima di avviare la richiesta
         axios.get(endpoint + id)
             .then(res => { setMovie(res.data); })
             .catch(err => {
                 console.log(err);
                 if (err.response?.status === 404) redirect('/404');
             })
+            .finally(() => setIsLoading(false)) // Disattivo loader quando termina la richiesta
     }
 
     // Richiamo funzione di fetch solo al montaggio della pagina
