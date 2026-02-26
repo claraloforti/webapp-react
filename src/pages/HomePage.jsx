@@ -2,24 +2,29 @@
 
 import axios from "axios"
 import { useState, useEffect } from "react"
+import { useGlobal } from "../contexts/GlobalContext";
 
-// Importo le cards
 import MovieCard from "../components/MovieCard"
 
 const endpoint = "http://localhost:3000/api/movies";
 
 const HomePage = () => {
 
+    // Funzione per aggiornare stato globale del loader
+    const { setIsLoading } = useGlobal();
+
     // Var di stato per l'array della lista dei film
     const [movies, setMovies] = useState([]);
 
     // Funzione che gestisce la chiamata alla rotta index di BE
     const fetchMovies = () => {
+        setIsLoading(true); // Attivo il loader prima di avviare la richiesta
         axios.get(endpoint)
             .then(res => { setMovies(res.data); })
             .catch(err => {
                 console.log(err);
             })
+            .finally(() => setIsLoading(false)) // Disattivo loader quando termina la richiesta
     }
 
     // Funzione di rendering del listato dei film
